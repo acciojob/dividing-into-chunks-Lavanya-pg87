@@ -3,11 +3,68 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divide Array into Chunks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #input, #output {
+            margin: 20px;
+        }
+        textarea {
+            width: 300px;
+            height: 100px;
+        }
+    </style>
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
+	 <div id="input">
+        <h3>Input</h3>
+        <label for="array">Array (comma separated):</label><br>
+        <textarea id="array"></textarea><br>
+        <label for="maxSum">Max Sum:</label><br>
+        <input type="number" id="maxSum"><br><br>
+        <button onclick="divideArray()">Divide</button>
+    </div>
+    <div id="output">
+        <h3>Output</h3>
+        <pre id="result"></pre>
+    </div>
+
+    <script>
+        function divideArray() {
+            const arrayInput = document.getElementById('array').value.split(',').map(Number);
+            const maxSum = parseInt(document.getElementById('maxSum').value);
+
+            const result = divide(arrayInput, maxSum);
+            document.getElementById('result').textContent = JSON.stringify(result, null, 2);
+        }
+
+        function divide(array, n) {
+            const result = [];
+            let currentSubarray = [];
+            let currentSum = 0;
+
+            for (let num of array) {
+                if (currentSum + num > n) {
+                    result.push(currentSubarray);
+                    currentSubarray = [];
+                    currentSum = 0;
+                }
+                currentSubarray.push(num);
+                currentSum += num;
+            }
+
+            if (currentSubarray.length > 0) {
+                result.push(currentSubarray);
+            }
+
+            return result;
+        }
+    </script>
     <script type="text/javascript" src="./script.js">
 </script>
 

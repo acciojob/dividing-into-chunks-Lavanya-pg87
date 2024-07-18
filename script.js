@@ -1,24 +1,17 @@
-const arr = [1, 2, 3, 4, 1, 0, 2, 2];
+function stringChop(str, size) {
+  // your code here
+	if(str === null){
+		return [];
+	}
+	let chunks = [];
+	
+	for(let i = 0; i<=str.length; i+=size){
+		chunks.push(str.slice(i, i+size));
+	}
+	return chunks;
+}
 
-const divide = (arr, n) => {
-      const result = [];
-      let currentSubarray = [];
-      let currentSum = 0;
-
-   for(const num of arr){
-    if(currentSum + num <= n){
-      currentSubarray.push(num);
-      currentSum += num;
-    }
-    else{
-      result.push(currentSubarray);
-      currentSum = num;
-    }
-   }
-   if(currentSubarray.length > 0){
-    result.push(currentSubarray);
-   }   
-};
-
-const n = prompt("Enter n: ");
-alert(JSON.stringify(divide(arr, n)));
+// Do not change the code below
+const str = prompt("Enter String.");
+const size = prompt("Enter Chunk Size.")
+alert(stringChop(str, size));
